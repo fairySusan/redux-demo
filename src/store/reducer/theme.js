@@ -1,10 +1,8 @@
-export const theme = (state, action) => {
-  if (!state) return {
-    themeColor: 'red'
-  }
+export const themeColor = (state, action) => {
+  if (!state) return 'red'
   switch (action.type) {
     case 'CHANGE_COLOR':
-      return { ...state, themeColor: action.themeColor }
+      return action.themeColor
     default:
       return state
   }

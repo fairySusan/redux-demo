@@ -1,6 +1,9 @@
-import {createStore} from '../redux'
-import {theme} from './reducer/theme'
+import {createStore, combineReducers} from '../redux'
+import {themeColor} from './reducer/theme'
+import {count} from './reducer/count'
 
-const store = createStore(theme)
+const rootReducer = combineReducers({themeColor, count})
+
+const store = createStore(rootReducer)
 
 export default store

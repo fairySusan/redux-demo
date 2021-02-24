@@ -14,6 +14,8 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponen
     componentWillMount() {
       const { store } = this.context;
       this._updateProps();
+
+      // 重点：当store的dispatch函数被调用，触发订阅者更新函数，这里触发 this._updateProps()，以更新视图
       store.subscribe(() => {
         this._updateProps()
       })
@@ -56,9 +58,7 @@ export class Provider extends Component {
   static childContextTypes = {
     store: PropTypes.object
   }
-  constructor(props) {
-    super(props)
-  }
+
   componentDidMount() {
     console.log('jjj', this.props.store)
   }

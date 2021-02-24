@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from './react-redux';
 import { themeAction } from './store/action/theme'
+import { countAdd } from './store/action/count'
 
 class ThemeSwitch extends Component {
   static propTypes = {
     themeColor: PropTypes.string,
-    onSwitchColor: PropTypes.func
+    onSwitchColor: PropTypes.func,
+    onCountChange: PropTypes.func,
+    count: PropTypes.number
   }
 
   constructor (props) {
@@ -19,19 +22,20 @@ class ThemeSwitch extends Component {
   handleSwitchColor (color) {
     if (this.props.onSwitchColor) {
       this.props.onSwitchColor(color)
+      this.props.onCountChange()
       // 这种方法的更新 跟 this.setState((state) => ({count: state.count + 1})) 一样的效果
       // this.state.count++;
       // this.setState({count: this.state.count});
       // console.log(this.state.count); 
 
-      this.setState((state) => ({count: state.count + 1}))
+      // this.setState((state) => ({count: state.count + 1}))
     }
   }
 
   render () {
     return (
       <div>
-        <h1>{this.state.count}</h1>
+        <h1>{this.props.count}</h1>
         <button
           style={{ color: this.props.themeColor }}
           onClick={this.handleSwitchColor.bind(this, 'red')}
@@ -44,12 +48,16 @@ class ThemeSwitch extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  themeColor: state.themeColor
+  themeColor: state.themeColor,
+  count: state.count
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSwitchColor: (color) => {
     dispatch(themeAction(color))
+  },
+  onCountChange: () => {
+    dispatch(countAdd())
   }
 })
 
