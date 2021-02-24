@@ -7,9 +7,6 @@ class Content extends Component {
   static propTypes = {
     themeColor: PropTypes.string
   }
-  constructor (props) {
-    super(props)
-  }
 
   render () {
     return (

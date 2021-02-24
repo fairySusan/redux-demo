@@ -8,10 +8,6 @@ class Header extends Component {
     themeColor: PropTypes.string
   }
 
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     return (
       <h1 style={{ color: this.props.themeColor }}>React.js 小书</h1>

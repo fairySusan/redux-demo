@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from './react-redux';
+import { themeAction } from './store/action/theme'
 
 class ThemeSwitch extends Component {
   static propTypes = {
@@ -18,9 +19,12 @@ class ThemeSwitch extends Component {
   handleSwitchColor (color) {
     if (this.props.onSwitchColor) {
       this.props.onSwitchColor(color)
-      this.state.count++;
-      this.setState({count: this.state.count});
-      console.log(this.state.count); // 这种方法的更新 跟 this.setState((state) => ({count: state.count + 1})) 一样的效果
+      // 这种方法的更新 跟 this.setState((state) => ({count: state.count + 1})) 一样的效果
+      // this.state.count++;
+      // this.setState({count: this.state.count});
+      // console.log(this.state.count); 
+
+      this.setState((state) => ({count: state.count + 1}))
     }
   }
 
@@ -45,7 +49,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSwitchColor: (color) => {
-    dispatch({type: 'CHANGE_COLOR', themeColor: color})
+    dispatch(themeAction(color))
   }
 })
 
